@@ -15,7 +15,22 @@
 
 import { CompiledContract } from "@midnight-ntwrk/midnight-js-protocol/compact-js";
 
-export * from "./managed/anonymous-feedback-board/contract/index.js";
+export {
+  State,
+  contractReferenceLocations,
+  Contract,
+  ledger,
+  pureCircuits,
+} from "./managed/anonymous-feedback-board/contract/index.js";
+export type {
+  Witnesses,
+  ImpureCircuits,
+  ProvableCircuits,
+  PureCircuits,
+  Circuits,
+  Ledger,
+  ContractReferenceLocations,
+} from "./managed/anonymous-feedback-board/contract/index.js";
 export * from "./witnesses";
 
 import * as CompiledAnonymousFeedbackBoardContract from "./managed/anonymous-feedback-board/contract/index.js";
