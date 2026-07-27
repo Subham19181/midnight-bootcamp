@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm install",
+  "buildCommand": "npm --prefix anonymous-feedback-board-ui run build",
+  "outputDirectory": "anonymous-feedback-board-ui/dist"
+}
