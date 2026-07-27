@@ -19,7 +19,7 @@
  * @packageDocumentation
  */
 
-import * as BBoard from '../../contract/src/managed/bboard/contract/index.js';
+import * as BBoard from '../../contract/src/managed/anonymous-feedback-board/contract/index.js';
 
 import { type ContractAddress, convertFieldToBytes } from '@midnight-ntwrk/midnight-js-protocol/compact-runtime';
 import { type Logger } from 'pino';
@@ -30,7 +30,7 @@ import {
   type DeployedBBoardContract,
   bboardPrivateStateKey,
 } from './common-types.js';
-import { CompiledBBoardContractContract } from '../../contract/src/index';
+import { CompiledAnonymousFeedbackBoardContractContract } from '../../contract/src/index';
 import * as utils from './utils/index.js';
 import { deployContract, findDeployedContract } from '@midnight-ntwrk/midnight-js-contracts';
 import { combineLatest, map, tap, from, type Observable } from 'rxjs';
@@ -183,7 +183,7 @@ export class BBoardAPI implements DeployedBBoardAPI {
     logger?.info('deployContract');
 
     const deployedBBoardContract = await deployContract(providers, {
-      compiledContract: CompiledBBoardContractContract,
+      compiledContract: CompiledAnonymousFeedbackBoardContractContract,
       privateStateId: bboardPrivateStateKey,
       initialPrivateState: createBBoardPrivateState(utils.randomBytes(32)),
     });
@@ -215,7 +215,7 @@ export class BBoardAPI implements DeployedBBoardAPI {
 
     const deployedBBoardContract = await findDeployedContract<BBoardContract>(providers, {
       contractAddress,
-      compiledContract: CompiledBBoardContractContract,
+      compiledContract: CompiledAnonymousFeedbackBoardContractContract,
       privateStateId: bboardPrivateStateKey,
       initialPrivateState: await BBoardAPI.getPrivateState(providers, contractAddress),
     });

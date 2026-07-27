@@ -25,7 +25,7 @@ import {
   Contract,
   type Ledger,
   ledger,
-} from "../managed/bboard/contract/index.js";
+} from "../managed/anonymous-feedback-board/contract/index.js";
 import { type BBoardPrivateState, witnesses } from "../witnesses.js";
 
 /**

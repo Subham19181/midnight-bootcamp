@@ -13,11 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { BBoardSimulator } from "./bboard-simulator.js";
+import { BBoardSimulator } from "./anonymous-feedback-board-simulator.js";
 import { setNetworkId } from "@midnight-ntwrk/midnight-js-network-id";
 import { describe, it, expect } from "vitest";
 import { randomBytes } from "./utils.js";
-import { State } from "../managed/bboard/contract/index.js";
+import { State } from "../managed/anonymous-feedback-board/contract/index.js";
 
 setNetworkId("undeployed");
 

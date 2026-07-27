@@ -33,7 +33,7 @@ import {
   type PrivateStateId,
 } from '../../api/src/index';
 import { type WalletFacade } from '@midnight-ntwrk/wallet-sdk-facade';
-import { ledger, type Ledger, State } from '../../contract/src/managed/bboard/contract/index.js';
+import { ledger, type Ledger, State } from '../../contract/src/managed/anonymous-feedback-board/contract/index.js';
 import { NodeZkConfigProvider } from '@midnight-ntwrk/midnight-js-node-zk-config-provider';
 import { indexerPublicDataProvider } from '@midnight-ntwrk/midnight-js-indexer-public-data-provider';
 import { httpClientProofProvider } from '@midnight-ntwrk/midnight-js-http-client-proof-provider';
