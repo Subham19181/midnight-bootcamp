@@ -18,7 +18,7 @@ import {
   type BBoardCircuitKeys,
   type BBoardProviders,
   type DeployedBBoardAPI,
-} from '../../../api/src/index';
+} from '@midnight-ntwrk/anonymous-feedback-board-api';
 import { type ContractAddress, fromHex, toHex } from '@midnight-ntwrk/midnight-js-protocol/compact-runtime';
 import {
   BehaviorSubject,
@@ -52,7 +52,7 @@ import {
 import { inMemoryPrivateStateProvider } from '../in-memory-private-state-provider';
 import { NetworkId } from '@midnight-ntwrk/midnight-js-network-id';
 import type { UnboundTransaction } from '@midnight-ntwrk/midnight-js-types';
-import { type BBoardPrivateState } from '../../../contract/src/witnesses.js';
+import { type BBoardPrivateState } from '@midnight-ntwrk/anonymous-feedback-board-contract';
 
 /**
  * An in-progress bulletin board deployment.
@@ -220,7 +220,7 @@ export class BrowserDeployedBoardManager implements DeployedBoardAPIProvider {
 const initializeProviders = async (logger: Logger): Promise<BBoardProviders> => {
   const networkId = import.meta.env.VITE_NETWORK_ID as NetworkId;
   const connectedAPI = await connectToWallet(logger, networkId);
-  const zkConfigPath = window.location.origin; // '../../../contract/src/managed/anonymous-feedback-board';
+  const zkConfigPath = window.location.origin; // 'keys';
   const keyMaterialProvider = new FetchZkConfigProvider<BBoardCircuitKeys>(zkConfigPath, fetch.bind(window));
   const config = await connectedAPI.getConfiguration();
   const inMemoryBBoardPrivateStateProvider = inMemoryPrivateStateProvider<string, BBoardPrivateState>();

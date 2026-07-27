@@ -32,6 +32,7 @@ export type {
   ContractReferenceLocations,
 } from "./managed/anonymous-feedback-board/contract/index.js";
 export * from "./witnesses";
+export { CompiledAnonymousFeedbackBoardContract as BBoard };
 
 import * as CompiledAnonymousFeedbackBoardContract from "./managed/anonymous-feedback-board/contract/index.js";
 import * as Witnesses from "./witnesses";
