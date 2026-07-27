@@ -70,6 +70,9 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
   const [boardState, setBoardState] = useState<BBoardDerivedState>();
   const [messagePrompt, setMessagePrompt] = useState<string>();
   const [isWorking, setIsWorking] = useState(!!boardDeployment$);
+  const isBoardVacant = boardState?.state === State.VACANT;
+  const isBoardOccupied = boardState?.state === State.OCCUPIED;
+  const isBoardOwnedByCurrentUser = isBoardOccupied && boardState?.isOwner === true;
 
   // Two simple callbacks that call `resolve(...)` to either deploy or join a bulletin board
   // contract. Since the `DeployedBoardContext` will create a new board and update the UI, we
@@ -241,17 +244,15 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
                     width: 40,
                     height: 40,
                     borderRadius: '50%',
-                    background:
-                      boardState.state === State.VACANT || (boardState.state === State.OCCUPIED && boardState.isOwner)
-                        ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)'
-                        : 'linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%)',
-                    border:
-                      boardState.state === State.VACANT || (boardState.state === State.OCCUPIED && boardState.isOwner)
-                        ? '1px solid rgba(16, 185, 129, 0.4)'
-                        : '1px solid rgba(239, 68, 68, 0.4)',
+                    background: isBoardVacant || isBoardOwnedByCurrentUser
+                      ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)'
+                      : 'linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%)',
+                    border: isBoardVacant || isBoardOwnedByCurrentUser
+                      ? '1px solid rgba(16, 185, 129, 0.4)'
+                      : '1px solid rgba(239, 68, 68, 0.4)',
                   }}
                 >
-                  {boardState.state === State.VACANT || (boardState.state === State.OCCUPIED && boardState.isOwner) ? (
+                  {isBoardVacant || isBoardOwnedByCurrentUser ? (
                     <LockOpenIcon data-testid="post-unlocked-icon" sx={{ color: '#34d399', fontSize: 20 }} />
                   ) : (
                     <LockIcon data-testid="post-locked-icon" sx={{ color: '#f87171', fontSize: 20 }} />
@@ -381,10 +382,10 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
                 <IconButton
                   title="Post message"
                   data-testid="board-post-message-btn"
-                  disabled={boardState?.state === State.OCCUPIED || !messagePrompt?.length}
+                  disabled={isBoardOccupied || !messagePrompt?.length}
                   onClick={onPostMessage}
                   sx={{
-                    color: boardState?.state === State.OCCUPIED || !messagePrompt?.length ? '#64748b' : '#a78bfa',
+                    color: isBoardOccupied || !messagePrompt?.length ? '#64748b' : '#a78bfa',
                     '&:hover:not(:disabled)': {
                       background: 'rgba(124, 58, 237, 0.15)',
                       transform: 'scale(1.1)',
@@ -399,16 +400,10 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
                 <IconButton
                   title="Take down message"
                   data-testid="board-take-down-message-btn"
-                  disabled={
-                    boardState?.state === State.VACANT || (boardState?.state === State.OCCUPIED && !boardState.isOwner)
-                  }
+                  disabled={isBoardVacant || (isBoardOccupied && !isBoardOwnedByCurrentUser)}
                   onClick={onDeleteMessage}
                   sx={{
-                    color:
-                      boardState?.state === State.VACANT ||
-                      (boardState?.state === State.OCCUPIED && !boardState.isOwner)
-                        ? '#64748b'
-                        : '#f87171',
+                    color: isBoardVacant || (isBoardOccupied && !isBoardOwnedByCurrentUser) ? '#64748b' : '#f87171',
                     '&:hover:not(:disabled)': {
                       background: 'rgba(239, 68, 68, 0.15)',
                       transform: 'scale(1.1)',
