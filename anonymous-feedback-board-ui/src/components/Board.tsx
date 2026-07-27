@@ -252,10 +252,7 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
                   }}
                 >
                   {boardState.state === State.VACANT || (boardState.state === State.OCCUPIED && boardState.isOwner) ? (
-                    <LockOpenIcon
-                      data-testid="post-unlocked-icon"
-                      sx={{ color: '#34d399', fontSize: 20 }}
-                    />
+                    <LockOpenIcon data-testid="post-unlocked-icon" sx={{ color: '#34d399', fontSize: 20 }} />
                   ) : (
                     <LockIcon data-testid="post-locked-icon" sx={{ color: '#f87171', fontSize: 20 }} />
                   )}
@@ -408,7 +405,8 @@ export const Board: React.FC<Readonly<BoardProps>> = ({ boardDeployment$ }) => {
                   onClick={onDeleteMessage}
                   sx={{
                     color:
-                      boardState?.state === State.VACANT || (boardState?.state === State.OCCUPIED && !boardState.isOwner)
+                      boardState?.state === State.VACANT ||
+                      (boardState?.state === State.OCCUPIED && !boardState.isOwner)
                         ? '#64748b'
                         : '#f87171',
                     '&:hover:not(:disabled)': {
