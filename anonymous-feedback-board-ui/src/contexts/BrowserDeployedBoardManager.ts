@@ -229,7 +229,13 @@ const initializeProviders = async (logger: Logger): Promise<BBoardProviders> => 
     privateStateProvider: inMemoryBBoardPrivateStateProvider,
     zkConfigProvider: keyMaterialProvider,
     proofProvider: httpClientProofProvider(config.proverServerUri!, keyMaterialProvider),
-    publicDataProvider: indexerPublicDataProvider(config.indexerUri, config.indexerWsUri),
+    // The provider's declaration uses the Node `ws` constructor type, but the
+    // browser-native implementation has the compatible runtime interface.
+    publicDataProvider: indexerPublicDataProvider(
+      config.indexerUri,
+      config.indexerWsUri,
+      window.WebSocket as unknown as typeof import('isomorphic-ws'),
+    ),
     walletProvider: {
       getCoinPublicKey(): string {
         return shieldedAddresses.shieldedCoinPublicKey;
