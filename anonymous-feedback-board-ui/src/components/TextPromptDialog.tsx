@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 
 /**
@@ -37,13 +37,41 @@ export const TextPromptDialog: React.FC<Readonly<TextPromptDialogProps>> = ({ pr
   const [text, setText] = useState<string>('');
 
   return (
-    <Dialog open={isOpen} onClose={onCancel} fullWidth maxWidth="sm">
-      <DialogTitle>
-        <Typography variant="body1" color="black" data-testid="textprompt-dialog-title">
+    <Dialog
+      open={isOpen}
+      onClose={onCancel}
+      fullWidth
+      maxWidth="sm"
+      slotProps={{
+        paper: {
+          sx: {
+            borderRadius: 3,
+            overflow: 'hidden',
+          },
+        },
+      }}
+    >
+      <DialogTitle
+        sx={{
+          pb: 2,
+          background: 'linear-gradient(90deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            color: '#f8fafc',
+            letterSpacing: '-0.01em',
+          }}
+          data-testid="textprompt-dialog-title"
+        >
           {prompt}
         </Typography>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ pt: 3, pb: 2 }}>
         <TextField
           id="text-prompt"
           variant="outlined"
@@ -52,29 +80,89 @@ export const TextPromptDialog: React.FC<Readonly<TextPromptDialogProps>> = ({ pr
           size="small"
           color="primary"
           autoComplete="off"
-          slotProps={{ htmlInput: { style: { color: 'black' } } }}
+          placeholder="Paste or type the contract address..."
+          slotProps={{
+            htmlInput: {
+              style: {
+                color: '#f8fafc',
+                fontSize: '0.95rem',
+              },
+            },
+            input: {
+              sx: {
+                background: 'rgba(255, 255, 255, 0.02)',
+                borderRadius: 2,
+              },
+            },
+          }}
           onChange={(e) => {
             setText(e.target.value);
           }}
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
           inputRef={(input) => input?.focus()}
           data-testid="textprompt-dialog-text-prompt"
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgba(124, 58, 237, 0.3)',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgba(124, 58, 237, 0.5)',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#7c3aed',
+              borderWidth: 2,
+            },
+          }}
         />
       </DialogContent>
 
-      <DialogActions>
-        <Button variant="contained" data-testid="textprompt-dialog-cancel-btn" disableElevation onClick={onCancel}>
+      <DialogActions
+        sx={{
+          px: 3,
+          pb: 3,
+          gap: 1.5,
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        }}
+      >
+        <Button
+          variant="outlined"
+          data-testid="textprompt-dialog-cancel-btn"
+          onClick={onCancel}
+          sx={{
+            color: '#94a3b8',
+            borderColor: 'rgba(148, 163, 184, 0.3)',
+            fontWeight: 600,
+            px: 3,
+            '&:hover': {
+              borderColor: 'rgba(148, 163, 184, 0.5)',
+              backgroundColor: 'rgba(148, 163, 184, 0.1)',
+              transform: 'translateY(-1px)',
+            },
+          }}
+        >
           Cancel
         </Button>
         <Button
           variant="contained"
           data-testid="textprompt-dialog-ok-btn"
           disabled={!text.length}
-          disableElevation
           onClick={() => {
             onSubmit(text);
           }}
           type="submit"
+          sx={{
+            background: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)',
+            boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
+            fontWeight: 600,
+            px: 4,
+            '&:hover:not(:disabled)': {
+              boxShadow: '0 6px 20px rgba(124, 58, 237, 0.6)',
+              transform: 'translateY(-1px)',
+            },
+            '&:disabled': {
+              opacity: 0.5,
+            },
+          }}
         >
           OK
         </Button>

@@ -15,7 +15,7 @@
 
 import React, { useState } from 'react';
 import { type ContractAddress } from '@midnight-ntwrk/midnight-js-protocol/compact-runtime';
-import { CardActions, CardContent, IconButton, Tooltip, Typography } from '@mui/material';
+import { CardActions, CardContent, IconButton, Tooltip, Typography, Box } from '@mui/material';
 import BoardAddIcon from '@mui/icons-material/PostAddOutlined';
 import CreateBoardIcon from '@mui/icons-material/AddCircleOutlined';
 import JoinBoardIcon from '@mui/icons-material/AddLinkOutlined';
@@ -46,28 +46,126 @@ export const EmptyCardContent: React.FC<Readonly<EmptyCardContentProps>> = ({
 
   return (
     <React.Fragment>
-      <CardContent>
-        <Typography align="center" variant="h1" color="primary.dark">
-          <BoardAddIcon fontSize="large" />
-        </Typography>
-        <Typography data-testid="board-posted-message" align="center" variant="body2" color="primary.dark">
+      <CardContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexGrow: 1,
+          py: 4,
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
+            mb: 3,
+            background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%)',
+            border: '2px solid rgba(124, 58, 237, 0.3)',
+            boxShadow: '0 0 40px rgba(124, 58, 237, 0.2), inset 0 0 20px rgba(124, 58, 237, 0.1)',
+          }}
+        >
+          <BoardAddIcon
+            sx={{
+              fontSize: 40,
+              color: '#a78bfa',
+            }}
+          />
+        </Box>
+        <Typography
+          data-testid="board-posted-message"
+          align="center"
+          variant="body1"
+          sx={{
+            color: '#94a3b8',
+            fontSize: '0.95rem',
+            fontWeight: 500,
+            lineHeight: 1.5,
+            maxWidth: 240,
+          }}
+        >
           Create a new Board, or join an existing one...
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: 'center' }}>
-        <Tooltip title="Create a new board">
-          <IconButton data-testid="board-deploy-btn" onClick={onCreateBoardCallback}>
-            <CreateBoardIcon />
+      <CardActions
+        disableSpacing
+        sx={{
+          justifyContent: 'center',
+          gap: 2,
+          pb: 3,
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+          pt: 2,
+        }}
+      >
+        <Tooltip
+          title="Create a new board"
+          slotProps={{
+            tooltip: {
+              sx: {
+                backgroundColor: 'rgba(15, 15, 26, 0.95)',
+                border: '1px solid rgba(124, 58, 237, 0.3)',
+                fontSize: '0.8rem',
+                fontWeight: 500,
+              },
+            },
+          }}
+        >
+          <IconButton
+            data-testid="board-deploy-btn"
+            onClick={onCreateBoardCallback}
+            sx={{
+              width: 48,
+              height: 48,
+              background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 100%)',
+              border: '1px solid rgba(124, 58, 237, 0.3)',
+              color: '#a78bfa',
+              '&:hover': {
+                background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(124, 58, 237, 0.15) 100%)',
+                transform: 'scale(1.1)',
+                boxShadow: '0 8px 20px rgba(124, 58, 237, 0.3)',
+              },
+            }}
+          >
+            <CreateBoardIcon sx={{ fontSize: 24 }} />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Join an existing board">
+        <Tooltip
+          title="Join an existing board"
+          slotProps={{
+            tooltip: {
+              sx: {
+                backgroundColor: 'rgba(15, 15, 26, 0.95)',
+                border: '1px solid rgba(6, 182, 212, 0.3)',
+                fontSize: '0.8rem',
+                fontWeight: 500,
+              },
+            },
+          }}
+        >
           <IconButton
             data-testid="board-join-btn"
             onClick={() => {
               setTextPromptOpen(true);
             }}
+            sx={{
+              width: 48,
+              height: 48,
+              background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(6, 182, 212, 0.05) 100%)',
+              border: '1px solid rgba(6, 182, 212, 0.3)',
+              color: '#22d3ee',
+              '&:hover': {
+                background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.25) 0%, rgba(6, 182, 212, 0.15) 100%)',
+                transform: 'scale(1.1)',
+                boxShadow: '0 8px 20px rgba(6, 182, 212, 0.3)',
+              },
+            }}
           >
-            <JoinBoardIcon />
+            <JoinBoardIcon sx={{ fontSize: 24 }} />
           </IconButton>
         </Tooltip>
       </CardActions>
