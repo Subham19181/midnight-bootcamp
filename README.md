@@ -1,62 +1,100 @@
 # Anonymous Feedback Board DApp
 
-Anonymous feedback board built on Midnight. Users can post a message, view the current board state, and remove their own post without revealing the private witness used to authorize the action.
+Anonymous Feedback Board is a privacy-preserving decentralized application built on the Midnight Network. It enables users to anonymously post feedback, view the current board state, and delete only their own feedback using a private witness without revealing their identity or secret.
 
-## Contract Address
+The project demonstrates how Midnight's confidential smart contracts can provide secure ownership verification while keeping sensitive user information private.
+
+---
+
+# Live Demo
+
+**Vercel Deployment:** https://midnight-bootcamp.vercel.app/
+
+---
+
+# Contract Address
 
 | Network | Contract Address |
 |---------|------------------|
-| Preprod | `<YOUR_DEPLOYED_CONTRACT_ADDRESS>` |
+| Preprod | **Pending** |
 
-Replace the placeholder after you deploy the Compact contract.
+---
 
-## Features
+# Features
 
-- Post one active feedback message at a time.
-- Remove the current post only with the private witness that created it.
-- Derive ownership from private state without exposing the secret key.
-- Use the same contract from the CLI and the browser UI.
-- Show loading, error, and contract-state feedback in the UI.
+- Post anonymous feedback securely.
+- Delete only your own feedback using a private witness.
+- Privacy-preserving authorization powered by Midnight.
+- View the latest board state in real time.
+- Shared contract API for both the CLI and Web UI.
+- Responsive React-based user interface.
+- Loading, success, and error feedback for user actions.
 
-## What This Project Does
+---
 
-This project is a full-stack Midnight DApp for posting anonymous feedback. The public ledger stores the current message, ownership hash, and sequence state. The private witness stays local to the user and is used to prove authorization when posting or removing a message.
+# Project Overview
 
-## Privacy Model
+Anonymous Feedback Board is a full-stack Midnight DApp designed to showcase confidential smart contracts and private ownership.
 
-- Public information: the current board state, the posted message, the ownership hash, and the sequence counter.
-- Private information: the user's secret witness key.
-- What users prove without revealing: the user proves they know the private witness needed to authorize posting or removal, without exposing the secret itself.
+Instead of exposing user identities or authorization keys on-chain, the application uses Midnight's private witness model. Users prove ownership of their feedback without revealing the underlying secret, ensuring both privacy and security.
 
-## Tech Stack
+The blockchain stores only the public board state while all sensitive authorization data remains private to the user.
 
-- Compact smart contract
+---
+
+# Privacy Model
+
+### Public Data
+
+- Current feedback message
+- Ownership hash
+- Board state
+- Sequence counter
+
+### Private Data
+
+- User's private witness
+- Secret authorization key
+
+### Authorization
+
+Users prove ownership of their feedback using a private witness without revealing the secret itself.
+
+---
+
+# Tech Stack
+
+- Midnight Compact Smart Contracts
+- Midnight.js
 - TypeScript
 - React
 - Vite
-- Midnight.js
-- Midnight proof server
-- Lace wallet extension
+- Lace Wallet
+- Midnight Proof Server
 
-## Folder Structure
+---
+
+# Project Structure
 
 ```text
 .
-├── api/                           # Shared contract-facing API layer
-├── contract/                      # Compact contract, witnesses, and generated assets
+├── api/                           # Shared contract API
+├── contract/                      # Compact smart contract
 │   └── src/anonymous-feedback-board.compact
 ├── anonymous-feedback-board-cli/  # Command-line client
-└── anonymous-feedback-board-ui/   # Browser client
+└── anonymous-feedback-board-ui/   # React application
 ```
 
-## Prerequisites
+---
 
-- Node.js 22 or newer
-- Docker Desktop running locally
-- Compact compiler available on `PATH`
-- Lace wallet extension for the browser UI
+# Prerequisites
 
-Recommended checks:
+- Node.js 22 or later
+- Docker Desktop
+- Compact Compiler
+- Lace Wallet Extension
+
+Verify your installation:
 
 ```bash
 node -v
@@ -64,23 +102,30 @@ docker --version
 compact --version
 ```
 
-## Installation
+---
+
+# Installation
 
 ```bash
 npm install
+
 cd api && npm install && cd ..
 cd contract && npm install && cd ..
 cd anonymous-feedback-board-cli && npm install && cd ..
 cd anonymous-feedback-board-ui && npm install && cd ..
 ```
 
-## Build
+---
+
+# Build
+
+Build the complete project:
 
 ```bash
 npm run build
 ```
 
-To build packages individually:
+Or build each package individually:
 
 ```bash
 cd api && npm run build
@@ -89,58 +134,71 @@ cd anonymous-feedback-board-cli && npm run build
 cd anonymous-feedback-board-ui && npm run build
 ```
 
-## Compile
+---
+
+# Compile Smart Contract
 
 ```bash
 npm run compact
 ```
 
-Or compile the contract directly:
+Or compile directly:
 
 ```bash
 cd contract
 npm run compact
 ```
 
-## Manual Deployment
+---
 
-Deployment is intentionally skipped in this repo.
+# Manual Deployment
 
-Run the deployment manually when you are ready:
+Deploy the Compact smart contract:
 
 ```bash
 NODE_OPTIONS="--max-old-space-size=12288" npm run deploy -- --network preprod
 ```
 
-## After Deployment
+After deployment, replace the **Pending** contract address in this README.
 
-The only manual steps left are:
+---
 
-1. Deploy the Compact contract.
-2. Copy the deployed contract address.
-3. Replace every occurrence of `<YOUR_DEPLOYED_CONTRACT_ADDRESS>`.
+# UI Screenshots
 
-No additional code changes should be required.
+### Home Page
 
-## Environment Variables
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 42 13 PM" src="https://github.com/user-attachments/assets/fce0a24c-8562-4d02-b45f-1ccbbc3e27e1" />
 
-- `VITE_NETWORK_ID`: Browser network target used by the UI. Current values in the repo are `preprod` and `preview`.
-- `VITE_LOGGING_LEVEL`: Browser logging level. Current values in the repo are `trace`.
-- `CONTRACT_ADDRESS`: Placeholder used after manual deployment. Replace `<YOUR_DEPLOYED_CONTRACT_ADDRESS>` wherever it appears.
+### Post Anonymous Feedback
 
-## Screenshots
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 43 49 PM" src="https://github.com/user-attachments/assets/b485d31c-8d6e-4f5f-831c-b21af6a61875" />
 
-- Add UI screenshots here after deployment.
-- Add CLI screenshots here after deployment.
+### Current Board State
 
-## Initial Idea
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 44 59 PM" src="https://github.com/user-attachments/assets/9f69e2e4-f1fa-4d7a-b505-37940e8a8fa1" />
 
-Anonymous Feedback Board.
+### Delete Feedback
 
-## Troubleshooting
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 52 51 PM" src="https://github.com/user-attachments/assets/2d65a522-1707-4765-b812-0e80724a71d0" />
 
-- If `compact --version` fails, reinstall the Compact compiler and ensure it is on `PATH`.
-- If the UI cannot connect, verify Docker is running and the proof server is available on port 6300.
-- If Lace is not detected, install or refresh the browser extension and restart the page.
-- If builds fail after editing the contract, re-run `npm run compact` from the repo root.
-- If the UI build complains about wallet connectivity, confirm `VITE_NETWORK_ID` matches the target network.
+---
+
+# Troubleshooting
+
+- Ensure Docker Desktop is running before starting the proof server.
+- Verify that the Compact compiler is available in your system `PATH`.
+- If the UI cannot connect, confirm the proof server is running on port `6300`.
+- If the Lace Wallet extension is not detected, refresh the browser or reinstall the extension.
+- After modifying the smart contract, run:
+
+```bash
+npm run compact
+```
+
+- Ensure `VITE_NETWORK_ID` matches the target deployment network.
+
+---
+
+# License
+
+This project was developed as part of the Midnight Bootcamp to demonstrate privacy-preserving decentralized applications using Midnight smart contracts.
