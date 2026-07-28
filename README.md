@@ -10,6 +10,12 @@ The project demonstrates how Midnight's confidential smart contracts can provide
 
 **Vercel Deployment:** https://midnight-bootcamp.vercel.app/
 
+
+
+https://github.com/user-attachments/assets/45c2d7bd-86d2-403b-a079-87f5c3a8bb6a
+
+
+
 ---
 
 # Contract Address
