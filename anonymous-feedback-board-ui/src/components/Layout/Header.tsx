@@ -14,53 +14,80 @@
 // limitations under the License.
 
 import React from 'react';
-import { AppBar, Box, Typography } from '@mui/material';
+import { AppBar, Box, Typography, Button } from '@mui/material';
+import WalletIcon from '@mui/icons-material/Wallet';
 
 /**
  * A simple application level header for the bulletin board application.
  */
-export const Header: React.FC = () => (
-  <AppBar
-    position="static"
-    data-testid="header"
-    sx={{
-      backgroundColor: 'transparent',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      px: 6,
-      py: 2,
-    }}
-  >
-    <Box
+export const Header: React.FC = () => {
+  const handleReconnectWallet = () => {
+    window.location.reload();
+  };
+
+  return (
+    <AppBar
+      position="static"
+      data-testid="header"
       sx={{
-        display: 'flex',
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
         alignItems: 'center',
-        gap: 3,
+        justifyContent: 'space-between',
+        px: 6,
+        py: 2,
       }}
-      data-testid="header-logo"
     >
-      <img
-        src="/midnight-logo.png"
-        alt="logo-image"
-        height={56}
-        style={{
-          filter: 'drop-shadow(0 0 20px rgba(124, 58, 237, 0.5))',
-        }}
-      />
-      <Typography
-        variant="h5"
+      <Box
         sx={{
-          fontWeight: 700,
-          background: 'linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          letterSpacing: '-0.02em',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 3,
+        }}
+        data-testid="header-logo"
+      >
+        <img
+          src="/midnight-logo.png"
+          alt="logo-image"
+          height={56}
+          style={{
+            filter: 'drop-shadow(0 0 20px rgba(124, 58, 237, 0.5))',
+          }}
+        />
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 700,
+            background: 'linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Anonymous Feedback Board
+        </Typography>
+      </Box>
+      <Button
+        variant="outlined"
+        onClick={handleReconnectWallet}
+        startIcon={<WalletIcon />}
+        data-testid="header-reconnect-wallet-btn"
+        sx={{
+          color: '#a78bfa',
+          borderColor: 'rgba(124, 58, 237, 0.5)',
+          '&:hover': {
+            borderColor: '#a78bfa',
+            backgroundColor: 'rgba(124, 58, 237, 0.1)',
+            transform: 'scale(1.02)',
+          },
+          fontWeight: 500,
+          textTransform: 'none',
+          letterSpacing: '0.02em',
         }}
       >
-        Anonymous Feedback Board
-      </Typography>
-    </Box>
-  </AppBar>
-);
+        Reconnect Wallet
+      </Button>
+    </AppBar>
+  );
+};
