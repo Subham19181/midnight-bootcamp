@@ -1,0 +1,41 @@
+name: Midnight DApp CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Compact Compiler
+        run: |
+          curl -L https://github.com/Midnight-NTWRK/compiler/releases/download/v0.8.0/compact-v0.8.0-x86_64-unknown-linux-gnu.tar.gz -o compact.tar.gz
+          tar -xzf compact.tar.gz
+          echo "$(pwd)/compact-v0.8.0-x86_64-unknown-linux-gnu" >> $GITHUB_PATH
+
+      - name: Verify Compact Compiler
+        run: compact --version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Compile contract
+        run: npm run compact
+
+      - name: Run tests
+        run: npm test

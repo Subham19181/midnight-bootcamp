@@ -58,7 +58,8 @@ jspm_packages/
 *.sln
 
 # Compact
-managed/
+# Note: managed/ is excluded from gitignore to allow pre-compiled contracts to be committed
+# managed/
 
 .claude
 .midnight-expert
