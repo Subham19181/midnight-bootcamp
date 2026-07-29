@@ -13,9 +13,8 @@
     }
   },
   "scripts": {
-    "build": "npm run compact && rm -rf dist && tsc --project tsconfig.build.json && cp -Rf ./src/managed ./dist/managed && cp ./src/anonymous-feedback-board.compact ./dist",
     "ci": "npm run compact && npm run typecheck && npm run lint && npm run build && npm run test",
-    "compact": "compact compile src/anonymous-feedback-board.compact ./src/managed/anonymous-feedback-board",
+    "compact": "if [ ! -d \"./compact-v0.8.0-x86_64-unknown-linux-gnu\" ]; then curl -L https://github.com/Midnight-NTWRK/compiler/releases/download/v0.8.0/compact-v0.8.0-x86_64-unknown-linux-gnu.tar.gz -o compact.tar.gz && tar -xzf compact.tar.gz; fi && PATH=\"$(pwd)/compact-v0.8.0-x86_64-unknown-linux-gnu:$PATH\" compact compile src/anonymous-feedback-board.compact ./src/managed/anonymous-feedback-board",
     "lint": "eslint src",
     "prepack": "npm build",
     "test": "vitest",
