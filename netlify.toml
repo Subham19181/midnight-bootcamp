@@ -1,0 +1,3 @@
+[build]
+  command = "curl -L https://github.com/Midnight-NTWRK/compiler/releases/download/v0.8.0/compact-v0.8.0-x86_64-unknown-linux-gnu.tar.gz -o compact.tar.gz && tar -xzf compact.tar.gz && export PATH="$(pwd)/compact-v0.8.0-x86_64-unknown-linux-gnu:$PATH" && npm run build"
+  publish = "anonymous-feedback-board-ui/dist"

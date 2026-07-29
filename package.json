@@ -8,6 +8,7 @@
   "scripts": {
     "compact": "npm --prefix contract run compact",
     "build": "npm --prefix contract run build && npm --prefix api run build && npm --prefix anonymous-feedback-board-cli run build && npm --prefix anonymous-feedback-board-ui run build",
+    "test": "npm test -w contract",
     "deploy": "echo 'Deployment is manual. Run NODE_OPTIONS=\"--max-old-space-size=12288\" npm run deploy -- --network preprod'"
   },
   "engines": {
