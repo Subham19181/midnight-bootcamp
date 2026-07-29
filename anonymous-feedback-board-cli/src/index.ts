@@ -33,6 +33,7 @@ import {
   type PrivateStateId,
 } from '../../api/src/index';
 import { type WalletFacade } from '@midnight-ntwrk/wallet-sdk-facade';
+import { State as ApiState } from '@midnight-ntwrk/anonymous-feedback-board-contract';
 import { ledger, type Ledger, State } from '../../contract/src/managed/anonymous-feedback-board/contract/index.js';
 import { NodeZkConfigProvider } from '@midnight-ntwrk/midnight-js-node-zk-config-provider';
 import { indexerPublicDataProvider } from '@midnight-ntwrk/midnight-js-indexer-public-data-provider';
@@ -158,8 +159,9 @@ const displayDerivedState = (ledgerState: BBoardDerivedState | undefined, logger
   if (ledgerState === undefined) {
     logger.info(`No bulletin board state currently available`);
   } else {
-    const boardState = ledgerState.state === State.OCCUPIED ? 'occupied' : 'vacant';
-    const latestMessage = ledgerState.state === State.OCCUPIED ? ledgerState.message : 'none';
+    const isOccupied = ledgerState.state === ApiState.OCCUPIED;
+    const boardState = isOccupied ? 'occupied' : 'vacant';
+    const latestMessage = isOccupied ? ledgerState.message : 'none';
     logger.info(`Current state is: '${boardState}'`);
     logger.info(`Current message is: '${latestMessage}'`);
     logger.info(`Current sequence is: ${ledgerState.sequence}`);

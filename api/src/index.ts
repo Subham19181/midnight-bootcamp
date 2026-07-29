@@ -19,8 +19,6 @@
  * @packageDocumentation
  */
 
-import * as BBoard from '../../contract/src/managed/anonymous-feedback-board/contract/index.js';
-
 import { type ContractAddress, convertFieldToBytes } from '@midnight-ntwrk/midnight-js-protocol/compact-runtime';
 import { type Logger } from 'pino';
 import {
@@ -30,12 +28,16 @@ import {
   type DeployedBBoardContract,
   bboardPrivateStateKey,
 } from './common-types.js';
-import { CompiledAnonymousFeedbackBoardContractContract } from '../../contract/src/index';
+import {
+  BBoard,
+  CompiledAnonymousFeedbackBoardContractContract,
+  BBoardPrivateState,
+  createBBoardPrivateState,
+} from '@midnight-ntwrk/anonymous-feedback-board-contract';
 import * as utils from './utils/index.js';
 import { deployContract, findDeployedContract } from '@midnight-ntwrk/midnight-js-contracts';
 import { combineLatest, map, tap, from, type Observable } from 'rxjs';
 import { toHex } from '@midnight-ntwrk/midnight-js-utils';
-import { BBoardPrivateState, createBBoardPrivateState } from '../../contract/src/witnesses.js';
 
 /** @internal */
 

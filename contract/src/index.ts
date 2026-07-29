@@ -15,15 +15,37 @@
 
 import { CompiledContract } from "@midnight-ntwrk/midnight-js-protocol/compact-js";
 
-export * from "./managed/anonymous-feedback-board/contract/index.js";
+export {
+  State,
+  contractReferenceLocations,
+  Contract,
+  ledger,
+  pureCircuits,
+} from "./managed/anonymous-feedback-board/contract/index.js";
+export type {
+  Witnesses,
+  ImpureCircuits,
+  ProvableCircuits,
+  PureCircuits,
+  Circuits,
+  Ledger,
+  ContractReferenceLocations,
+} from "./managed/anonymous-feedback-board/contract/index.js";
 export * from "./witnesses";
+export { CompiledAnonymousFeedbackBoardContract as BBoard };
 
 import * as CompiledAnonymousFeedbackBoardContract from "./managed/anonymous-feedback-board/contract/index.js";
 import * as Witnesses from "./witnesses";
 
-export const CompiledAnonymousFeedbackBoardContractContract = CompiledContract.make<
-  CompiledAnonymousFeedbackBoardContract.Contract<Witnesses.BBoardPrivateState>
->("AnonymousFeedbackBoard", CompiledAnonymousFeedbackBoardContract.Contract<Witnesses.BBoardPrivateState>).pipe(
-  CompiledContract.withWitnesses(Witnesses.witnesses),
-  CompiledContract.withCompiledFileAssets("./managed/anonymous-feedback-board"),
-);
+export const CompiledAnonymousFeedbackBoardContractContract =
+  CompiledContract.make<
+    CompiledAnonymousFeedbackBoardContract.Contract<Witnesses.BBoardPrivateState>
+  >(
+    "AnonymousFeedbackBoard",
+    CompiledAnonymousFeedbackBoardContract.Contract<Witnesses.BBoardPrivateState>,
+  ).pipe(
+    CompiledContract.withWitnesses(Witnesses.witnesses),
+    CompiledContract.withCompiledFileAssets(
+      "./managed/anonymous-feedback-board",
+    ),
+  );

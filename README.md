@@ -8,7 +8,10 @@ Anonymous feedback board built on Midnight. Users can post a message, view the c
 - **Live Demo URL**: `<YOUR_DEMO_URL>`
 - **Preprod Contract Address**: `<YOUR_DEPLOYED_CONTRACT_ADDRESS>`
 
-## Features
+- Current feedback message
+- Ownership hash
+- Board state
+- Sequence counter
 
 The only manual steps left are:
 
@@ -19,15 +22,13 @@ The only manual steps left are:
 2.  Update the contract address in `/anonymous-feedback-board-ui/.env.local`.
 3.  Update the CI badge URL at the top of this README.
 
-No additional code changes should be required.
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 42 13 PM" src="https://github.com/user-attachments/assets/fce0a24c-8562-4d02-b45f-1ccbbc3e27e1" />
 
-## Environment Variables
+### Post Anonymous Feedback
 
-- `VITE_NETWORK_ID`: Browser network target used by the UI. Current values in the repo are `preprod` and `preview`.
-- `VITE_LOGGING_LEVEL`: Browser logging level. Current values in the repo are `trace`.
-- `CONTRACT_ADDRESS`: Placeholder used after manual deployment. Replace `<YOUR_DEPLOYED_CONTRACT_ADDRESS>` wherever it appears.
+<img width="1470" height="956" alt="Screenshot 2026-07-27 at 6 43 49 PM" src="https://github.com/user-attachments/assets/b485d31c-8d6e-4f5f-831c-b21af6a61875" />
 
-## Screenshots
+### Current Board State
 
 **UI Screenshot:**
 
